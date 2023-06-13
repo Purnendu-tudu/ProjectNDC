@@ -9,6 +9,7 @@ import 'package:projectndc/user_views/app_loginpage.dart';
 import 'package:projectndc/widgets/Custom_Button.dart';
 import 'package:projectndc/widgets/Cutsom_Password_Textfield.dart';
 import 'package:projectndc/widgets/custom_msg_snackbar.dart';
+import '../app_config/loading.dart';
 import '../widgets/Custom_Textfield.dart';
 import '../widgets/FrostedGlass.dart';
 import 'login.dart';
@@ -27,11 +28,30 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   final pass1 = TextEditingController();
   final pass2 = TextEditingController();
 
+  var loadingObj = Loading();
+
   resetPassword(String userId, String newPassword, String confirmPassword) async {
     try{
       PasswordResetController passwordResetController = PasswordResetController();
       PasswordResetResponseModel passResetResponse = await passwordResetController.resetPassword(userId, newPassword, confirmPassword);
       if(passResetResponse.status == true){
+        Future.delayed(const Duration(microseconds: 92),(){
+          Navigator.of(context).pop();
+          Future.delayed(const Duration(microseconds: 30),(){
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => OTPfield(email: result.data!.email??'', buttonId: widget.buttonName, userId: collegeidController.text.toString(),)));
+          });
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackMessage(
+              messageIcon: Icons.verified_outlined,
+              messageTitle: "Successful",
+              messageBody: passResetResponse.message??'',
+              color: Colors.green),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          duration: Duration( milliseconds: 3000),
+        ));
 
       }else{
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
