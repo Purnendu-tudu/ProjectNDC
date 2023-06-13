@@ -46,18 +46,18 @@ class _JobState extends State<Job> {
       );
       loadingObj.showLoadingDialog(context);
       if(result.status == true){
-        Future.delayed(Duration(seconds: 2),(){
+        Future.delayed(const Duration(seconds: 2),(){
           Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: CustomSnackMessage(
                 messageIcon: Icons.verified,
                 messageTitle: "Success",
                 messageBody: result.message??'',
-                color: Color(0xFF3AAFA9)),
+                color: const Color(0xFF3AAFA9)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            duration: Duration( milliseconds: 3000),
+            duration: const Duration( milliseconds: 3000),
           ));
           setState(() {
             jobcompanycontroller.clear();
@@ -80,7 +80,7 @@ class _JobState extends State<Job> {
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          duration: Duration( milliseconds: 3000),
+          duration: const Duration( milliseconds: 3000),
         ));
 
       }
@@ -99,7 +99,7 @@ class _JobState extends State<Job> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/b3.jpg'),
             fit: BoxFit.cover,
@@ -108,7 +108,7 @@ class _JobState extends State<Job> {
         alignment: Alignment.center,
         child: FrostedGlass(
           glassWidth: 80*SizeConfig.widthmultiplier,
-          glassHeight: 58*SizeConfig.heightmultiplier,
+          glassHeight: 65*SizeConfig.heightmultiplier,
           glassRadius: 2*SizeConfig.heightmultiplier,
           glassChild: SingleChildScrollView(
             child: Column(
@@ -117,7 +117,7 @@ class _JobState extends State<Job> {
               children: [
                 SizedBox(height: 2*SizeConfig.heightmultiplier,),
                 Center(child: Text("Job", style: TextStyle(fontSize: 4*SizeConfig.heightmultiplier, fontFamily: 'Kanit'),)),
-                SizedBox(height: 5*SizeConfig.heightmultiplier,),
+                SizedBox(height: 3*SizeConfig.heightmultiplier,),
                 CustomTextfield(
                   textfield_width: 70* SizeConfig.widthmultiplier,
                   icon_details: Icons.business,

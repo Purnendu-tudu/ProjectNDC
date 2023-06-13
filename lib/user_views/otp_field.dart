@@ -2,28 +2,100 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projectndc/app_components/colour.dart';
+import 'package:projectndc/app_controllers/app_validate_otp_controller.dart';
 import 'package:projectndc/widgets/Custom_Button.dart';
 import '../app_components/device_configuration.dart';
 import '../app_components/app_constants.dart';
+import '../app_config/loading.dart';
+import '../app_models/app_validate_otp_reposne_model.dart';
 import '../widgets/Custom_Textfield.dart';
 import '../widgets/Cutsom_Password_Textfield.dart';
 import '../widgets/FrostedGlass.dart';
+import '../widgets/custom_msg_snackbar.dart';
+import 'app_forgot_password.dart';
 import 'enterCID.dart';
-import 'enterPass.dart';
+import 'registration_form_pass.dart';
 
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 
 class OTPfield extends StatefulWidget {
-  const OTPfield({Key? key}) : super(key: key);
+  final String email;
+  final String userId;
+  final String buttonId;
+  const OTPfield({Key? key, required this.email, required this.buttonId, required this.userId}) : super(key: key);
 
   @override
   State<OTPfield> createState() => _OTPfieldState();
 }
 
 class _OTPfieldState extends State<OTPfield> {
-  String email = "kha*******na@gmail.com";
+  String email = "";
   String Otp="";
+
+  var loadingObj = Loading();
+
+  String obFocusEmail(String email, int visibleCharacters){
+    int atIndex = email.indexOf("@");
+    if(atIndex > 0){
+      String emailUsername = email.substring(0, atIndex);
+      String obfocousPart = emailUsername.substring(0,visibleCharacters).replaceAll(RegExp(r'.'), '*');
+      String domain = email.substring(atIndex);
+      return emailUsername.substring(0, visibleCharacters) + obfocousPart + domain;
+    }
+
+    return email;
+  }
+
+  verifyOtp(String userId, String otp) async{
+    ValidateOtpController validateOtpController = ValidateOtpController();
+    ValidateOtpResponseModel validationResponse = await validateOtpController.validateOtp(userId, otp);
+    if(validationResponse.status == true){
+
+      if(widget.buttonId == "forgotPassword"){
+        Future.delayed(const Duration(microseconds: 92),(){
+          Navigator.of(context).pop();
+          Future.delayed(const Duration(microseconds: 30),(){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordForm(userId: widget.userId,)));
+          });
+        });
+
+        print("forgotPassword");
+      }else{
+        print(widget.buttonId);
+        Future.delayed(const Duration(microseconds: 92),(){
+          Navigator.of(context).pop();
+          Future.delayed(const Duration(microseconds: 30),(){
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => SignUpForm(userEmail: widget.email, userId: widget.userId,)));
+          });
+        });
+      }
+
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: CustomSnackMessage(
+            messageIcon: Icons.error_outline_rounded,
+            messageTitle: "Error",
+            messageBody: validationResponse.message??'',
+            color: Colors.redAccent),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        duration: Duration( milliseconds: 3000),
+      ));
+
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    final obemail = obFocusEmail(widget.email, 5);
+    setState(() {
+      email = obemail;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +117,7 @@ class _OTPfieldState extends State<OTPfield> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomButton(button_text: "Yes", button_width: 18*SizeConfig.widthmultiplier, onClick: (){
-                        Navigator.push(context, CupertinoPageRoute(builder: (context) => const EnterCid()));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => const EnterCid(buttonName: 'forgotPassword',)));
                       }),
                       CustomButton(button_text: "No", button_width: 18*SizeConfig.widthmultiplier, onClick: (){
                         Navigator.of(context).pop();
@@ -69,7 +141,7 @@ class _OTPfieldState extends State<OTPfield> {
         },
         child: Scaffold(
           body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/b4.jpg'),
                 fit: BoxFit.cover,
@@ -79,7 +151,7 @@ class _OTPfieldState extends State<OTPfield> {
             child: FrostedGlass(
               glassWidth: 90*SizeConfig.widthmultiplier,
               glassHeight: 65*SizeConfig.heightmultiplier,
-              glassRadius: 5*SizeConfig.heightmultiplier,
+              glassRadius: 2*SizeConfig.heightmultiplier,
               glassChild: SingleChildScrollView(
                 child: SafeArea(
                   child: Form(
@@ -87,9 +159,6 @@ class _OTPfieldState extends State<OTPfield> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 3*SizeConfig.heightmultiplier,
-                        ),
                         //to keep icon
                         Center(
                           child: Container(
@@ -113,10 +182,10 @@ class _OTPfieldState extends State<OTPfield> {
                           ),
                         ),
                         SizedBox(
-                          height: 4*SizeConfig.heightmultiplier,
+                          height: 2*SizeConfig.heightmultiplier,
                         ),
                         Text(
-                          "Enter the OTP that is sent in your email : "+email,
+                            "OTP has bee sent to : "+email,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Kanit',
@@ -150,7 +219,7 @@ class _OTPfieldState extends State<OTPfield> {
                           }, // end onSubmit
                         ),
                         SizedBox(
-                          height: 9*SizeConfig.heightmultiplier,
+                          height: 5*SizeConfig.heightmultiplier,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -161,10 +230,41 @@ class _OTPfieldState extends State<OTPfield> {
                             CustomButton(
                               button_text: "Confirm",
                               onClick: (){
-                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => const EnterPassword()));
+                                if(Otp != "" && Otp.length == 6){
+                                  print(Otp);
+                                  loadingObj.showLoadingDialog(context);
+                                  verifyOtp(widget.userId, Otp);
+
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: CustomSnackMessage(
+                                        messageIcon: Icons.error_outline_rounded,
+                                        messageTitle: "Error",
+                                        messageBody: "Enter Valid Otp",
+                                        color: Colors.redAccent),
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: Colors.transparent,
+                                    elevation: 0,
+                                    duration: Duration( milliseconds: 3000),
+                                  ));
+
+                                }
+
                                 },
                               button_width: 30*SizeConfig.widthmultiplier,)
                           ],
+                        ),
+                        SizedBox(
+                          height: 5*SizeConfig.heightmultiplier,
+                        ),
+                        Text(
+                          "*Before Resend,wait a while It may take time for otp to reach you,or check your spam folder",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Kanit',
+                              fontSize: 1.5*SizeConfig.heightmultiplier,
+                              color: Colors.redAccent
+                          ),
                         ),
                       ],
                     ),

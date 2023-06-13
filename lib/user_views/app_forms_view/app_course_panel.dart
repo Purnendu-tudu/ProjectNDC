@@ -49,18 +49,18 @@ class _CourseState extends State<Course> {
     );
       loadingObj.showLoadingDialog(context);
       if(result.status == true){
-        Future.delayed(Duration(seconds: 2),(){
+        Future.delayed(const Duration(seconds: 2),(){
           Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: CustomSnackMessage(
                 messageIcon: Icons.verified,
                 messageTitle: "Success",
                 messageBody: result.message??'',
-                color: Color(0xFF3AAFA9)),
+                color: const Color(0xFF3AAFA9)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            duration: Duration( milliseconds: 3000),
+            duration: const Duration( milliseconds: 3000),
           ));
           setState(() {
             coursetypecontroller.clear();
@@ -82,7 +82,7 @@ class _CourseState extends State<Course> {
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          duration: Duration( milliseconds: 3000),
+          duration: const Duration( milliseconds: 3000),
         ));
 
       }
@@ -98,7 +98,7 @@ class _CourseState extends State<Course> {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        duration: Duration( milliseconds: 3000),
+        duration: const Duration( milliseconds: 3000),
       ));
 
     }
@@ -137,7 +137,7 @@ class _CourseState extends State<Course> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/b3.jpg'),
             fit: BoxFit.cover,
@@ -146,7 +146,7 @@ class _CourseState extends State<Course> {
         alignment: Alignment.center,
         child: FrostedGlass(
           glassWidth: 80 * SizeConfig.widthmultiplier,
-          glassHeight: 50 * SizeConfig.heightmultiplier,
+          glassHeight: 59 * SizeConfig.heightmultiplier,
           glassRadius: 2 * SizeConfig.heightmultiplier,
           glassChild: SingleChildScrollView(
             child: Column(
@@ -173,7 +173,7 @@ class _CourseState extends State<Course> {
                           prefixIcon: const Icon(Icons.school_outlined),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(6*SizeConfig.heightmultiplier/2)),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color:Colors.red
                               ),
                           ),
@@ -220,6 +220,8 @@ class _CourseState extends State<Course> {
                 ),
                 SizedBox(height: 2 * SizeConfig.heightmultiplier,),
                 CustomTextfield(
+                  maxLength: 4,
+                  textfield_isdigits: true,
                   textfield_width: 70* SizeConfig.widthmultiplier,
                   icon_details: Icons.calendar_month,
                   textfield_text_colour: Colour.BLUE_TEXT2,

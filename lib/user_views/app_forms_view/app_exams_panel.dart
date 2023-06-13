@@ -48,18 +48,18 @@ class _ExamState extends State<Exam> {
       );
       loadingObj.showLoadingDialog(context);
       if(result.status == true){
-        Future.delayed(Duration(seconds: 2),(){
+        Future.delayed(const Duration(seconds: 2),(){
           Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: CustomSnackMessage(
                 messageIcon: Icons.verified,
                 messageTitle: "Success",
                 messageBody: result.message??'',
-                color: Color(0xFF3AAFA9)),
+                color: const Color(0xFF3AAFA9)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            duration: Duration( milliseconds: 3000),
+            duration: const Duration( milliseconds: 3000),
           ));
           setState(() {
             examnamecontroller.clear();
@@ -81,7 +81,7 @@ class _ExamState extends State<Exam> {
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          duration: Duration( milliseconds: 3000),
+          duration: const Duration( milliseconds: 3000),
         ));
 
       }
@@ -97,7 +97,7 @@ class _ExamState extends State<Exam> {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        duration: Duration( milliseconds: 3000),
+        duration: const Duration( milliseconds: 3000),
       ));
 
     }
@@ -138,7 +138,7 @@ class _ExamState extends State<Exam> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/b3.jpg'),
             fit: BoxFit.cover,
@@ -147,7 +147,7 @@ class _ExamState extends State<Exam> {
         alignment: Alignment.center,
         child: FrostedGlass(
             glassWidth: 80*SizeConfig.widthmultiplier,
-            glassHeight: 50*SizeConfig.heightmultiplier,
+            glassHeight: 59*SizeConfig.heightmultiplier,
             glassRadius: 2*SizeConfig.heightmultiplier,
             glassChild: SingleChildScrollView(
               child: Form(
@@ -173,7 +173,7 @@ class _ExamState extends State<Exam> {
                             prefixIcon: const Icon(Icons.content_paste),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(6*SizeConfig.heightmultiplier/2)),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color:Colors.red
                               ),
                             ),
@@ -220,6 +220,8 @@ class _ExamState extends State<Exam> {
                     ),
                     SizedBox(height: 2 * SizeConfig.heightmultiplier,),
                     CustomTextfield(
+                      textfield_isdigits: true,
+                      maxLength: 4,
                       textfield_width: 70* SizeConfig.widthmultiplier,
                       textfield_text_colour: Colour.BLUE_TEXT2,
                       icon_details: Icons.calendar_month,

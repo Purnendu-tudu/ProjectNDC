@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projectndc/app_controllers/app_college_id_controller.dart';
+import 'package:projectndc/app_controllers/app_otp_request_controller.dart';
 import 'package:projectndc/user_views/app_loginpage.dart';
 import 'package:projectndc/widgets/Custom_Button.dart';
 import 'package:projectndc/widgets/Custom_Textfield.dart';
@@ -7,12 +9,16 @@ import 'package:projectndc/widgets/FrostedGlass.dart';
 import '../app_components/device_configuration.dart';
 import '../app_components/colour.dart';
 import '../app_components/app_constants.dart';
+import '../app_config/loading.dart';
+import '../app_models/app_otp_request_response_model.dart';
+import '../app_models/app_userId_verify_response_model.dart';
 import '../widgets/custom_msg_snackbar.dart';
-import 'enterPass.dart';
+import 'registration_form_pass.dart';
 import 'otp_field.dart';
 
 class EnterCid extends StatefulWidget {
-  const EnterCid({Key? key}) : super(key: key);
+  final String buttonName;
+  const EnterCid({Key? key, required this.buttonName}) : super(key: key);
 
   @override
   State<EnterCid> createState() => _EnterCidState();
@@ -20,7 +26,71 @@ class EnterCid extends StatefulWidget {
 
 class _EnterCidState extends State<EnterCid> {
 
+  var loadingObj = Loading();
+
   final collegeidController = TextEditingController();
+
+  userIdVerification(String userId) async {
+    UserIdVerifyController userIdVerifyController = UserIdVerifyController();
+    UserIdVerfiyResponseModel result = await userIdVerifyController.verifyId(userId);
+    if(result.status == true){
+      //request otp on the email and redirect to the otp page
+      RequestOtpController requestOtpController = RequestOtpController();
+      RequestOtpResponseModel requestOtp = await requestOtpController.requestOtp(result.data?.email??'');
+      if(requestOtp.status == true){
+        Future.delayed(const Duration(microseconds: 92),(){
+          Navigator.of(context).pop();
+          Future.delayed(const Duration(microseconds: 30),(){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => OTPfield(email: result.data!.email??'', buttonId: widget.buttonName, userId: collegeidController.text.toString(),)));
+          });
+        });
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: CustomSnackMessage(
+              messageIcon: Icons.verified_outlined,
+              messageTitle: "Successful",
+              messageBody: "User found",
+              color: Colors.green),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          duration: Duration( milliseconds: 3000),
+        ));
+      }else{
+        Future.delayed(const Duration(microseconds: 92),(){
+          Navigator.of(context).pop();
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackMessage(
+              messageIcon: Icons.person_off,
+              messageTitle: "Error",
+              messageBody: result.message??'',
+              color: Colors.redAccent),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          duration: const Duration( milliseconds: 3000),
+        ));
+      }
+
+      print(result.data?.email);
+    }else{
+      // no email found
+      Future.delayed(const Duration(microseconds: 92),(){
+        Navigator.of(context).pop();
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: CustomSnackMessage(
+            messageIcon: Icons.person_off,
+            messageTitle: "Error",
+            messageBody: result.message??'',
+            color: Colors.redAccent),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        duration: const Duration( milliseconds: 3000),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +109,7 @@ class _EnterCidState extends State<EnterCid> {
         },
         child: Scaffold(
           body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/b4.jpg'),
                 fit: BoxFit.cover,
@@ -58,7 +128,7 @@ class _EnterCidState extends State<EnterCid> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 4*SizeConfig.heightmultiplier,
+                            height: 0.5*SizeConfig.heightmultiplier,
                           ),
                           //to keep icon
                           Center(
@@ -75,7 +145,7 @@ class _EnterCidState extends State<EnterCid> {
                               child: SizedBox(
                                 height: 11*SizeConfig.heightmultiplier,
                                 width: 11*SizeConfig.heightmultiplier,
-                                child: Image(
+                                child: const Image(
                                   image: AssetImage('assets/ndc_logo.png'),
                                 ),
                               ),
@@ -124,8 +194,8 @@ class _EnterCidState extends State<EnterCid> {
                               ));
                             }
                             else {
-                              Navigator.push(context, CupertinoPageRoute(
-                                  builder: (context) => const OTPfield()));
+                              loadingObj.showLoadingDialog(context);
+                              userIdVerification(collegeidController.text.toString());
                             }
                           }),
                         ],

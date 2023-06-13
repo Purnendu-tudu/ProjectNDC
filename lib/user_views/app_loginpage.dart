@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               TextButton(
                                 onPressed: (){
-                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => const EnterCid()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const EnterCid(buttonName: 'forgotPassword')));
                                 },
                                 child: Text(constants.Texts.FORGOR_PASS_TEXT,
                                   style: TextStyle(
@@ -310,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
 
                               TextButton(
                                 onPressed: (){
-                                  Navigator.push(context, CupertinoPageRoute(builder: (context) => const EnterCid()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const EnterCid(buttonName: 'signUp')));
                                 },
                                 child: Text(constants.Texts.text8,
                                   style: TextStyle(

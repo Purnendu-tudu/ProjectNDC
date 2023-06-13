@@ -95,7 +95,7 @@ class _ProfileState extends State<Profile> {
               // SizedBox(
               //   height: 4*SizeConfig.heightmultiplier,
               // ),
-              //to keep icon
+              //to keep icon              
               FrostedGlass(
                 glassWidth: 100*SizeConfig.widthmultiplier,
                 glassHeight: 10.5*SizeConfig.heightmultiplier,
@@ -132,7 +132,6 @@ class _ProfileState extends State<Profile> {
                               },
                             child: Column(
                               children: [
-                                const SizedBox(height: 10,),
                                 Icon(Icons.logout_rounded, color: Colors.white,size: 10 * SizeConfig.imageSizeMultiplier,),
                                 const Text("Log Out", style: TextStyle(fontFamily: 'Kanit', fontSize: 15,color: Colors.white),),
                               ],
@@ -148,212 +147,210 @@ class _ProfileState extends State<Profile> {
               SizedBox(
                 height: 1*SizeConfig.heightmultiplier,
               ),
-              FrostedGlass(
-                glassWidth: 90*SizeConfig.widthmultiplier,
-                glassHeight: 74*SizeConfig.heightmultiplier,
-                // topmargin: 10*SizeConfig.heightmultiplier,
-                // bottommargin: 10*SizeConfig.heightmultiplier,
-                // sidemargin: 10*SizeConfig.widthmultiplier,
-                glassRadius: 2*SizeConfig.heightmultiplier,
-                glassChild: Container(
-                  margin: EdgeInsets.all(2 * SizeConfig.widthmultiplier),
-                  child:isLoading?const Center(child: CircularProgressIndicator(),) : hasData? SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 3*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.account_circle_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Name: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier, fontFamily: 'Kanit'),
-                                ),
-                                Text(name,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier, fontFamily: 'JosefinSans', color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.badge_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("College ID: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier, fontFamily: 'Kanit'),
-                                ),
-                                Text(cid,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier, fontFamily: 'JosefinSans', color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.school_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Degree: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
-                                ),
-                                Text(degree,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.people_alt_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Gender: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
-                                ),
-                                Text(gender,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.insert_chart_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Caste: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
-                                ),
-                                Text(caste,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.call,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Phone number: ",
-                                  style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
-                                ),
-                                Text(phone,
-                                  style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 2*SizeConfig.heightmultiplier,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Icon(Icons.email_outlined,size: 4.5*SizeConfig.heightmultiplier),
-                            SizedBox(width: 3*SizeConfig.widthmultiplier),
-                            Expanded(
-                              child: Column(
+              Flexible(
+                child: FrostedGlass(
+                  glassWidth: 90*SizeConfig.widthmultiplier,
+                  glassHeight: 70*SizeConfig.heightmultiplier,
+                  // topmargin: 10*SizeConfig.heightmultiplier,
+                  // bottommargin: 10*SizeConfig.heightmultiplier,
+                  // sidemargin: 10*SizeConfig.widthmultiplier,
+                  glassRadius: 2*SizeConfig.heightmultiplier,
+                  glassChild: Container(
+                    margin: EdgeInsets.all(2 * SizeConfig.widthmultiplier),
+                    child:isLoading?const Center(child: CircularProgressIndicator(),) : hasData? SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 3*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.account_circle_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Email: ",
-                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                  Text("Name: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier, fontFamily: 'Kanit'),
                                   ),
-                                  Text(
-                                    email,
-                                    maxLines: 2,
-                                    style: TextStyle(fontSize: 2.2*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                  Text(name,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier, fontFamily: 'JosefinSans', color: Colour.BLUE_TEXT2),
                                   )
                                 ],
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 3*SizeConfig.heightmultiplier,
-                        ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.badge_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("College ID: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier, fontFamily: 'Kanit'),
+                                  ),
+                                  Text(cid,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier, fontFamily: 'JosefinSans', color: Colour.BLUE_TEXT2),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.school_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Degree: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                  ),
+                                  Text(degree,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.people_alt_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Gender: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                  ),
+                                  Text(gender,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.insert_chart_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Caste: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                  ),
+                                  Text(caste,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.call,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Phone number: ",
+                                    style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                  ),
+                                  Text(phone,
+                                    style: TextStyle(fontSize: 2.5*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2*SizeConfig.heightmultiplier,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Icon(Icons.email_outlined,size: 4.5*SizeConfig.heightmultiplier),
+                              SizedBox(width: 3*SizeConfig.widthmultiplier),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Email: ",
+                                      style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),
+                                    ),
+                                    Text(
+                                      email,
+                                      maxLines: 2,
+                                      style: TextStyle(fontSize: 2.2*SizeConfig.heightmultiplier,fontFamily: 'JosefinSans',color: Colour.BLUE_TEXT2),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3*SizeConfig.heightmultiplier,
+                          ),
+                          Center(child: Text("Add Information",textAlign: TextAlign.center, style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),)),
 
-                        SizedBox(
-                          height: 3*SizeConfig.heightmultiplier,
-                        ),
-                        Center(child: Text("Add Information",textAlign: TextAlign.center, style: TextStyle(fontSize: 2*SizeConfig.heightmultiplier,fontFamily: 'Kanit'),)),
+                          Center(
+                            child: TextButton(
+                              style: ButtonStyle(
 
-                        Center(
-                          child: TextButton(
-                            style: ButtonStyle(
-
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                  ),
                                 ),
                               ),
-                            ),
-                            onPressed: (){
-                              Navigator.push(context, CupertinoPageRoute(builder: (context) => const SelectOption()));
-                            }, child: Icon(Icons.add_circle,size: 8*SizeConfig.heightmultiplier, color: Colors.black26,),
-                            ),
-                        ),
-                      ],
-                    ),
-                  ):const Text("Unauthorized"),
+                              onPressed: (){
+                                Navigator.push(context, CupertinoPageRoute(builder: (context) => const SelectOption()));
+                              }, child: Icon(Icons.add_circle,size: 8*SizeConfig.heightmultiplier, color: Colors.black26,),
+                              ),
+                          ),
+                        ],
+                      ),
+                    ):const Text("Unauthorized"),
+                  ),
                 ),
               ),
             ],

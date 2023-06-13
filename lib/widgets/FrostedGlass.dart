@@ -41,8 +41,8 @@ class FrostedGlass extends StatelessWidget {
             //BLUR
             BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 7.0,
-                  sigmaY: 7.0,
+                  sigmaX: 9.0,
+                  sigmaY: 9.0,
                 ),
               child: Container(),
             ),
@@ -56,8 +56,8 @@ class FrostedGlass extends StatelessWidget {
                     begin: Alignment. topLeft,
                     end: Alignment. bottomRight,
                     colors: [
-                      Colour.BACKGROUND_COLOR.withOpacity(0.15),
-                      Colour.BACKGROUND_COLOR.withOpacity(0.05)
+                      Colour.BACKGROUND_COLOR.withOpacity(0.25),
+                      Colour.BACKGROUND_COLOR.withOpacity(0.06)
                     ]
                 ),
               ),

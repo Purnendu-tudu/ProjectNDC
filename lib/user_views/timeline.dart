@@ -134,7 +134,9 @@ class _User_timelineState extends State<User_timeline>  with TickerProviderState
         ),
         alignment: Alignment.center,
         child: SafeArea(
-          child:isLoading?const Center(child: CircularProgressIndicator(),) : hasData? ListView(
+          child:isLoading?const Center(child: CircularProgressIndicator(
+            color: Colors.white,
+          ),) : hasData? ListView(
             children: [Column(
               children: [
                 // SizedBox(
@@ -243,8 +245,8 @@ class _User_timelineState extends State<User_timeline>  with TickerProviderState
                                                 width: 75*SizeConfig.widthmultiplier,
                                                 height: 15*SizeConfig.heightmultiplier,
                                                 child: TimelineTile(
-                                                  isFirst: index == 0,
-                                                  isLast: index == (abc.length -1),
+                                                  // isFirst: index == 0,
+                                                  // isLast: index == (abc.length -1),
                                                   beforeLineStyle: LineStyle(
                                                     color: Colors.white,
                                                     thickness: 0.2*SizeConfig.widthmultiplier,

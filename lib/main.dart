@@ -5,7 +5,7 @@ import 'package:projectndc/Sample.dart';
 import 'package:projectndc/user_views/bodypage.dart';
 import 'package:projectndc/user_views/app_forms_view/app_course_panel.dart';
 import 'package:projectndc/user_views/enterCID.dart';
-import 'package:projectndc/user_views/enterPass.dart';
+import 'package:projectndc/user_views/registration_form_pass.dart';
 import 'package:projectndc/user_views/app_forms_view/app_exams_panel.dart';
 import 'package:projectndc/user_views/app_forms_view/app_job_panel.dart';
 import 'package:projectndc/user_views/login.dart';
@@ -55,9 +55,6 @@ class MyApp extends StatelessWidget {
                     '/exams_panel' : (context) => const Exam(),
                     '/job_panel' : (context) => const Job(),
                     '/course_panel' : (context) => const Course(),
-                    '/enterCID' : (context) => const EnterCid(),
-                    '/otp_field' : (context) => const OTPfield(),
-                    '/enterPass' : (context) => const EnterPassword(),
                     '/profile' : (context) => const Profile(),
                     '/timeline' : (context) => const User_timeline(),
                     '/bodypage' : (context) => const Bodypage(),

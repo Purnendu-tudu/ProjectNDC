@@ -16,6 +16,7 @@ class CustomTextfield extends StatelessWidget {
   IconData? icon_details;
   double opacity;
   bool? textfield_isdigits;
+  int? maxLength;
   VoidCallback? onTap;
 
 
@@ -28,6 +29,7 @@ class CustomTextfield extends StatelessWidget {
     this.textfield_width,
     required this.textfield_colour,
     this.textfield_text_colour,
+    this.maxLength,
     this.onTap,
     Key? key, }) : super(key: key);
 
@@ -52,6 +54,7 @@ class CustomTextfield extends StatelessWidget {
             keyboardType: textfield_isdigits??false ? TextInputType.number: null,
             inputFormatters: textfield_isdigits??false ?[
               FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(maxLength??null)
             ]: null,
             controller: textController,
             style: TextStyle(color: textfield_text_colour??Colour.BLUE_BACKGROUND, fontFamily: 'JosefinSans', fontSize: 2.5*SizeConfig.heightmultiplier),

@@ -1,149 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projectndc/app_components/colour.dart';
 import 'package:projectndc/app_components/device_configuration.dart';
 import 'package:projectndc/user_views/app_loginpage.dart';
 import 'package:projectndc/widgets/Custom_Button.dart';
 import 'package:projectndc/widgets/Cutsom_Password_Textfield.dart';
 import 'package:projectndc/widgets/custom_msg_snackbar.dart';
+import '../widgets/Custom_Textfield.dart';
 import '../widgets/FrostedGlass.dart';
 import 'login.dart';
 
-// class EnterPassword extends StatefulWidget {
-//   const EnterPassword({Key? key}) : super(key: key);
-//
-//   @override
-//   State<EnterPassword> createState() => _EnterPasswordState();
-// }
-//
-// class _EnterPasswordState extends State<EnterPassword> {
-//   final pass1 = TextEditingController();
-//   final pass2 = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       // resizeToAvoidBottomInset: false,
-//       backgroundColor: Colour.SUPER_BACKGROUND_COLOR,
-//       body: SafeArea(
-//         child: Center(
-//
-//           child: Container(
-//             width: 80*SizeConfig.widthmultiplier,  //change
-//             height: 60*SizeConfig.heightmultiplier,
-//             child: Container(
-//               decoration: BoxDecoration(
-//                 color: Colour.SUPER_BACKGROUND_COLOR,
-//                 borderRadius: BorderRadius.all(Radius.circular(5*SizeConfig.heightmultiplier)),
-//
-//                 boxShadow: [
-//                   BoxShadow(
-//                     color: Colour.SUPER_GREY,
-//                     blurRadius: 10,
-//                     offset: const Offset(10.0, 10.0,),
-//                   ),
-//                   BoxShadow(
-//                     color: Colour.BACKGROUND_COLOR,
-//                     blurRadius: 10,
-//                     offset: const Offset(-10.0, -10.0,),
-//                   ),],
-//               ),
-//
-//               child: SingleChildScrollView(
-//                 child: Column(
-//                 children: [
-//                 Padding(
-//                   padding: EdgeInsets.only(top: 5*SizeConfig.heightmultiplier),
-//                   child: Container(
-//                     height: 10*SizeConfig.heightmultiplier,
-//                     width: 10*SizeConfig.heightmultiplier,
-//
-//                     decoration: BoxDecoration(
-//                       color: Colour.SUPER_BACKGROUND_COLOR,
-//                       borderRadius: BorderRadius.all(Radius.circular(5*SizeConfig.heightmultiplier)),
-//
-//                       boxShadow: [
-//                         BoxShadow(
-//                           color: Colour.SUPER_GREY,
-//                           blurRadius: 10,
-//                           offset: const Offset(10.0, 10.0,),
-//                         ),
-//                         BoxShadow(
-//                           color: Colour.BACKGROUND_COLOR,
-//                           blurRadius: 10,
-//                           offset: const Offset(-10.0, -10.0,),
-//                         ),],
-//
-//                     ),
-//
-//                       child: Center(
-//                         child: SizedBox(
-//                           height: 15*SizeConfig.heightmultiplier,
-//                           width: 15*SizeConfig.widthmultiplier,
-//                           child: Image(
-//                             image: AssetImage('assets/ndc_logo.png'),
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//
-//                   Padding(padding: EdgeInsets.only(top: 4*SizeConfig.heightmultiplier),
-//                     child: Text("Enter Password",
-//                       style: TextStyle(fontSize: 4*SizeConfig.heightmultiplier, color: Colour.BLUE_TEXT),
-//                     ),
-//                   ),
-//
-//                   Padding(padding: EdgeInsets.only(top: 1*SizeConfig.heightmultiplier),
-//                     child: CustomPasswordTextfield(passwordController: pass1, textfield_colour: Colour.SUPER_BACKGROUND_COLOR,),
-//                   ),
-//
-//                   Padding(padding: EdgeInsets.only(top: 2*SizeConfig.heightmultiplier),
-//                     child: Text("Confirm Password",
-//                       style: TextStyle(fontSize: 4*SizeConfig.heightmultiplier, color: Colour.BLUE_TEXT),
-//                     ),
-//                   ),
-//
-//                   Padding(padding: EdgeInsets.only(top: 1*SizeConfig.heightmultiplier),
-//                     child: CustomPasswordTextfield(passwordController: pass2, textfield_colour: Colour.SUPER_BACKGROUND_COLOR,),
-//                   ),
-//
-//                   Padding(padding: EdgeInsets.only(top: 6*SizeConfig.heightmultiplier),
-//                     child: CustomButton(button_width: 40*SizeConfig.widthmultiplier, button_text: "Submit", onClick: ()
-//                     {
-//                       if (pass1.text == pass2.text){
-//                         print("yes, same passwords");
-//                         Navigator.push(context, CupertinoPageRoute(builder: (context) => const Login()));
-//                       }
-//                       else{
-//                         print("Diff passwords");
-//                       }
-//                     }),
-//                   )
-//
-//
-//
-//                   ],),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
-class EnterPassword extends StatefulWidget {
-  const EnterPassword({Key? key}) : super(key: key);
+class SignUpForm extends StatefulWidget {
+  final String userEmail;
+  final String userId;
+  const SignUpForm({Key? key, required this.userEmail, required this.userId}) : super(key: key);
 
   @override
-  State<EnterPassword> createState() => _EnterPasswordState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _EnterPasswordState extends State<EnterPassword> {
+class _SignUpFormState extends State<SignUpForm> {
 
   final pass1 = TextEditingController();
   final pass2 = TextEditingController();
+  final passoutYearcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -169,8 +51,8 @@ class _EnterPasswordState extends State<EnterPassword> {
             alignment: Alignment.center,
             child: FrostedGlass(
               glassWidth: 80*SizeConfig.widthmultiplier,
-              glassHeight: 60*SizeConfig.heightmultiplier,
-              glassRadius: 5*SizeConfig.heightmultiplier,
+              glassHeight: 75*SizeConfig.heightmultiplier,
+              glassRadius: 2*SizeConfig.heightmultiplier,
               glassChild: SingleChildScrollView(
                 child: SafeArea(
                   child: Form(
@@ -178,9 +60,6 @@ class _EnterPasswordState extends State<EnterPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 3*SizeConfig.heightmultiplier,
-                        ),
                         //to keep icon
                         Center(
                           child: Container(
@@ -206,9 +85,54 @@ class _EnterPasswordState extends State<EnterPassword> {
                         SizedBox(
                           height: 2.5*SizeConfig.heightmultiplier,
                         ),
-                        Text("Enter Password", style: TextStyle(fontSize: 3*SizeConfig.heightmultiplier),),
-                        SizedBox(
-                          height: 2.5*SizeConfig.heightmultiplier,
+                        Text("Enter Details", style: TextStyle(fontSize: 3*SizeConfig.heightmultiplier),),
+                        Padding(
+                          padding: const EdgeInsets.all(35.0),
+                          child: CustomTextfield(
+                            textfield_isdigits: true,
+                            maxLength: 4,
+                            textfield_width: 70* SizeConfig.widthmultiplier,
+                            textfield_text_colour: Colour.BLUE_TEXT2,
+                            icon_details: Icons.calendar_month,
+                            opacity: 0.4,
+                            textfield_text: "Year of passout",
+                            textController: passoutYearcontroller,
+                            textfield_colour: Colour.BLUE_BACKGROUND,
+                            onTap: () async{
+                              DateTime _selectedDate = DateTime.now();
+                              showDialog(context: context, builder:(BuildContext context){
+                                return AlertDialog(
+                                  content: SizedBox(
+                                    width: 300,
+                                    height: 300,
+                                    child: YearPicker(
+                                      firstDate: DateTime(DateTime.now().year - 100, 1),
+                                      lastDate: DateTime.now(),
+                                      initialDate: DateTime.now(),
+                                      // save the selected date to _selectedDate DateTime variable.
+                                      // It's used to set the previous selected date when
+                                      // re-showing the dialog.
+                                      selectedDate: _selectedDate,
+                                      onChanged: (DateTime dateTime) {
+                                        // close the dialog when year is selected.
+                                        setState(() {
+                                          passoutYearcontroller.text = DateFormat('yyyy').format(dateTime);
+                                        });
+                                        Navigator.pop(context);
+
+                                        // Do something with the dateTime selected.
+                                        // Remember that you need to use dateTime.year to get the year
+                                      },
+                                    ),
+                                  ),
+                                );
+                              });
+
+
+
+
+                            },
+                          ),
                         ),
                         CustomPasswordTextfield(passwordController: pass1, textfield_colour: Colour.BLUE_BACKGROUND, opacity: 0.2, icon_hidden: true,),
                         SizedBox(
